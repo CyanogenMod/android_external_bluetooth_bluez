@@ -64,9 +64,6 @@
 #include "gateway.h"
 #include "sink.h"
 #include "source.h"
-#ifdef STE_BT
-#include "ste-avrcp.h"
-#endif
 #include "control.h"
 #include "manager.h"
 #include "sdpd.h"
@@ -222,11 +219,7 @@ static void handle_uuid(const char *uuidstr, struct audio_device *device)
 		DBG("Found AV %s", uuid16 == AV_REMOTE_SVCLASS_ID ?
 							"Remote" : "Target");
 		if (device->control)
-#ifndef STE_BT
 			control_update(device, uuid16);
-#else
-			control_update(device->control, uuid16);
-#endif
 		else
 			device->control = control_init(device, uuid16);
 

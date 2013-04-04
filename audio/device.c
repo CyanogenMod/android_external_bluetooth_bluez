@@ -53,10 +53,6 @@
 #include "unix.h"
 #include "avdtp.h"
 #include "control.h"
-#ifdef STE_BT
-#include "ste-avctp.h"
-#include "ste-avrcp.h"
-#endif
 #include "headset.h"
 #include "gateway.h"
 #include "sink.h"

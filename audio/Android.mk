@@ -6,8 +6,10 @@ include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES:= \
 	device.c \
+	control.c \
 	gateway.c \
 	headset.c \
+	media.c \
 	ipc.c \
 	main.c \
 	manager.c \
@@ -20,19 +22,13 @@ LOCAL_SRC_FILES:= \
 ifneq ($(BOARD_HAVE_BLUETOOTH_STE),true)
 LOCAL_SRC_FILES+= \
 	a2dp.c \
-	media.c \
-	control.c \
 	avdtp.c \
 	unix.c
 
 else
 LOCAL_SRC_FILES+= \
 	ste-a2dp.c \
-	ste-media.c \
-	ste-control.c \
 	ste-avdtp.c \
-	ste-avctp.c \
-	ste-avrcp.c \
 	ste-unix.c \
 	ste-qos.c
 endif
