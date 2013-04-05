@@ -208,15 +208,27 @@ static struct media_endpoint *media_endpoint_create(struct media_adapter *adapte
 	endpoint->adapter = adapter;
 
 	if (strcasecmp(uuid, A2DP_SOURCE_UUID) == 0) {
+#ifndef STE_BT
 		endpoint->sep = a2dp_add_sep(&adapter->src,
 					AVDTP_SEP_TYPE_SOURCE, codec,
 					delay_reporting, endpoint, err);
+#else
+		endpoint->sep = a2dp_add_sep(&adapter->src,
+					AVDTP_SEP_TYPE_SOURCE, codec,
+					delay_reporting, 0, endpoint, err);
+#endif
 		if (endpoint->sep == NULL)
 			goto failed;
 	} else if (strcasecmp(uuid, A2DP_SINK_UUID) == 0) {
+#ifndef STE_BT
 		endpoint->sep = a2dp_add_sep(&adapter->src,
 						AVDTP_SEP_TYPE_SINK, codec,
 						delay_reporting, endpoint, err);
+#else
+		endpoint->sep = a2dp_add_sep(&adapter->src,
+						AVDTP_SEP_TYPE_SINK, codec,
+						delay_reporting, 0, endpoint, err);
+#endif
 		if (endpoint->sep == NULL)
 			goto failed;
 	} else if (strcasecmp(uuid, HFP_AG_UUID) == 0 ||

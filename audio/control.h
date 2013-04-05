@@ -24,7 +24,6 @@
 
 #define AUDIO_CONTROL_INTERFACE "org.bluez.Control"
 
-#ifndef STE_BT
 typedef enum {
 	AVCTP_STATE_DISCONNECTED = 0,
 	AVCTP_STATE_CONNECTING,
@@ -44,13 +43,9 @@ void avrcp_unregister(const bdaddr_t *src);
 
 gboolean avrcp_connect(struct audio_device *dev);
 void avrcp_disconnect(struct audio_device *dev);
-#endif
 
 struct control *control_init(struct audio_device *dev, uint16_t uuid16);
-#ifndef STE_BT
 void control_update(struct audio_device *dev, uint16_t uuid16);
-#else
-void control_update(struct control *control, uint16_t uuid16);
-#endif
+
 void control_unregister(struct audio_device *dev);
 gboolean control_is_active(struct audio_device *dev);
